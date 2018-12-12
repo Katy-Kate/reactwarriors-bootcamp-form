@@ -32,7 +32,7 @@ export default class App extends React.Component {
         mobile: false,
         city: false
       },
-      activeStep: 2,
+      activeStep: 1,
       isDisablePrevBtn: true,
       isDisableNextBtn: true
     };
