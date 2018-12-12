@@ -32,7 +32,7 @@ export default class App extends React.Component {
         mobile: false,
         city: false
       },
-      activeStep: 2,
+      activeStep: 1,
       isDisablePrevBtn: true,
       isDisableNextBtn: true
     };
@@ -98,7 +98,19 @@ export default class App extends React.Component {
       }
     }
   };
+  onChangeAvatar = event => {
+    const avatar = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = event => {
+      this.setState({
+        values: { avatar: event.target.result }
+      });
+    };
 
+    reader.readAsDataURL(avatar);
+
+    console.log("ava", event.target);
+  };
   render() {
     const { activeStep, values, errors } = this.state;
     return (
@@ -121,9 +133,9 @@ export default class App extends React.Component {
           ) : null}
           {activeStep === 3 ? (
             <AvatarInfo
-              errors={errors}
-              onChange={this.onChange}
-              values={values}
+              error={errors.avatar}
+              onChangeAvatar={this.onChangeAvatar}
+              img={values.avatar}
             />
           ) : null}
           {activeStep === 4 ? (
