@@ -65,9 +65,9 @@ export default class App extends React.Component {
       }
     } else if (this.state.activeStep === 2) {
       const regExpMail = new RegExp("^.+@[^.].*.[a-z]{2,}$");
-      //const regExpMobile = new RegExp(
-        "^((8|+7)[- ]?)?((?d{3})?[- ]?)?[d- ]{7,10}$"
-      );
+      // const regExpMobile = new RegExp(
+      //   "^((8|+7)[- ]?)?((?d{3})?[- ]?)?[d- ]{7,10}$"
+      // );
       if (!regExpMail.test(this.state.values.email)) {
         errors.email = "Invalid email address";
       }
