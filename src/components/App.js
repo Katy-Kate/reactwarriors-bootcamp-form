@@ -113,18 +113,7 @@ export default class App extends React.Component {
   };
   clearInfo = event => () => {
     this.setState({
-      values: {
-        firstname: "",
-        lastname: "",
-        password: "",
-        repeatPassword: "",
-        gender: "male",
-        email: "",
-        mobile: "",
-        country: 1,
-        city: "",
-        avatar: ""
-      },
+      values: {},
       activeStep: 1
     });
   };
