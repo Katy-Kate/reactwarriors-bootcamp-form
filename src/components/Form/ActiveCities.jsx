@@ -2,7 +2,7 @@ import React from "react";
 
 export default class ActiveCities extends React.Component {
   render() {
-    const { array, onChange, values, error } = this.props;
+    const { cities, onChange, values, error } = this.props;
     return (
       <div className="form-group">
         <label htmlFor="country">City</label>
@@ -14,15 +14,14 @@ export default class ActiveCities extends React.Component {
           value={values.city}
         >
           <option value="">Select city</option>
-          {array
-            ? array.map(item => {
-                return (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                );
-              })
-            : null}
+          {cities.map(key => {
+            const { cityId, nameCity } = key;
+            return (
+              <option key={cityId} value={cityId} name={nameCity}>
+                {nameCity}
+              </option>
+            );
+          })}
         </select>
         {error ? <div className="invalid-feedback">{error}</div> : null}
       </div>

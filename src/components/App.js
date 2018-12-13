@@ -32,9 +32,7 @@ export default class App extends React.Component {
         mobile: false,
         city: false
       },
-      activeStep: 1,
-      isDisablePrevBtn: true,
-      isDisableNextBtn: true
+      activeStep: 1
     };
   }
 
@@ -65,18 +63,20 @@ export default class App extends React.Component {
       }
     } else if (this.state.activeStep === 2) {
       const regExpMail = new RegExp("^.+@[^.].*.[a-z]{2,}$");
-      // const regExpMobile = new RegExp(
-      //   "^((8|+7)[- ]?)?((?d{3})?[- ]?)?[d- ]{7,10}$"
-      // );
+      const regExpMobile = new RegExp("[0-9]{9,}");
       if (!regExpMail.test(this.state.values.email)) {
         errors.email = "Invalid email address";
       }
-      // if (!this.state.values.mobile.match(regExpMobile)) {
-      //   console.log("Daaa");
-      //   errors.email = "Invalid mobile number";
-      // }
+      if (!regExpMobile.test(this.state.values.mobile)) {
+        console.log("Daaa");
+        errors.mobile = "Invalid mobile number";
+      }
       if (!this.state.values.city) {
         errors.city = "Required";
+      }
+    } else if (this.state.activeStep === 3) {
+      if (!this.state.values.avatar) {
+        errors.avatar = "Required";
       }
     }
     return errors;
@@ -102,17 +102,40 @@ export default class App extends React.Component {
     const avatar = event.target.files[0];
     const reader = new FileReader();
     reader.onload = event => {
-      this.setState({
-        values: { avatar: event.target.result }
-      });
+      this.setState(prevState => ({
+        values: { ...prevState.values, avatar: event.target.result }
+      }));
     };
 
     reader.readAsDataURL(avatar);
 
     console.log("ava", event.target);
   };
+  clearInfo = event => () => {
+    this.setState({
+      values: {
+        firstname: "",
+        lastname: "",
+        password: "",
+        repeatPassword: "",
+        gender: "male",
+        email: "",
+        mobile: "",
+        country: 1,
+        city: "",
+        avatar: ""
+      },
+      activeStep: 1
+    });
+  };
   render() {
-    const { activeStep, values, errors } = this.state;
+    const {
+      activeStep,
+      values,
+      errors,
+      isDisablePrevBtn,
+      isDisableNextBtn
+    } = this.state;
     return (
       <div className="form-container card">
         <form className="form card-body">
@@ -138,18 +161,13 @@ export default class App extends React.Component {
               img={values.avatar}
             />
           ) : null}
-          {activeStep === 4 ? (
-            <FinishInfo
-              errors={errors}
-              onChange={this.onChange}
-              values={values}
-            />
-          ) : null}
+          {activeStep === 4 ? <FinishInfo values={values} /> : null}
 
-          <div className="d-flex justify-content-center">
-            <ButtonsSteps name="Previous" onChangeStep={this.onChangeStep} />
-            <ButtonsSteps name="Next" onChangeStep={this.onChangeStep} />
-          </div>
+          <ButtonsSteps
+            onChangeStep={this.onChangeStep}
+            activeStep={activeStep}
+            clearInfo={this.clearInfo}
+          />
         </form>
       </div>
     );

@@ -6,36 +6,21 @@ import ActiveCities from "./ActiveCities";
 import cities from "../../data/cities";
 
 export default class ContactsInfo extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      renderСities: []
-    };
-  }
-  getCities = arr => {
-    const countryNumber = Number(arr);
+  getCities = countryId => {
     const aciveCities = [];
-    for (let city in cities) {
-      const index = cities[city];
-      if (countryNumber === index.country) {
-        aciveCities.push(index.name);
+    for (let key in cities) {
+      if (Number(countryId) === cities[key].country) {
+        aciveCities.push({
+          cityId: key,
+          nameCity: cities[key].name
+        });
       }
     }
-
-    this.setState({
-      renderСities: aciveCities
-    });
+    return aciveCities;
   };
-  componentDidUpdate = (prevProps, prevState) => {
-    if (this.props.values.country !== prevProps.values.country) {
-      this.getCities(this.props.values.country);
-    }
-  };
-  componentDidMount() {
-    this.getCities(this.props.values.country);
-  }
   render() {
     const { values, onChange, errors } = this.props;
+    const cities = this.getCities(values.country);
     return (
       <div>
         <Field
@@ -60,7 +45,7 @@ export default class ContactsInfo extends React.Component {
         />
         <SelectedField array={countries} onChange={onChange} />
         <ActiveCities
-          array={this.state.renderСities}
+          cities={cities}
           onChange={onChange}
           values={values}
           error={errors.city}
