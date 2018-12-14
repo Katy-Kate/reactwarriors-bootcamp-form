@@ -41,7 +41,7 @@ export default class Basic extends React.Component {
           id="repeatPassword"
           labelText="Repeat password"
           type="password"
-          placeholderText="Enter repeatPassword"
+          placeholderText="Repeat password"
           name="repeatPassword"
           value={values.repeatPassword}
           onChange={onChange}

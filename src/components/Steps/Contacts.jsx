@@ -1,15 +1,15 @@
 import React from "react";
 import UIField from "../UIComponents/UIField";
-import CountryOptions from "../Form/CountryOptions";
+import CountryOptions from "../Options/CountryOptions";
 import countries from "../../data/countries";
-import CitiesOptions from "../Form/CitiesOptions";
+import CitiesOptions from "../Options/CitiesOptions";
 import cities from "../../data/cities";
 
 export default class Contacts extends React.Component {
   getCities = countryId => {
     const aciveCities = [];
     for (let key in cities) {
-      if (Number(countryId) === cities[key].country) {
+      if (Number(countryId) === Number(cities[key].country)) {
         aciveCities.push({
           cityId: key,
           nameCity: cities[key].name
