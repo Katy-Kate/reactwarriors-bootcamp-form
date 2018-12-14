@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class ActiveCities extends React.Component {
+export default class CitiesOptions extends React.Component {
   render() {
     const { cities, onChange, values, error } = this.props;
     return (

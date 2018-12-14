@@ -2,12 +2,9 @@ import React from "react";
 import cities from "../../data/cities";
 import countries from "../../data/countries";
 
-export default class FinishInfo extends React.Component {
+export default class Finish extends React.Component {
   getLocation = cityId => {
-    const cityInfo = cities[cityId];
-    console.log(cityInfo);
-    const { country, name } = cityInfo;
-    let location;
+    const { country, name } = cities[cityId];
     let countryName;
     countries.map(i => {
       if (i.id === country) {
@@ -15,14 +12,12 @@ export default class FinishInfo extends React.Component {
       }
     });
 
-    return (location = countryName + ", " + name);
+    return countryName + " , " + name;
   };
 
   render() {
     const { values } = this.props;
-    // debugger;
     const userLocation = this.getLocation(values.city);
-    console.log("aaa", this.props);
 
     return (
       <div className="user-info">

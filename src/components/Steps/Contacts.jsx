@@ -1,11 +1,11 @@
 import React from "react";
-import Field from "./Field";
-import SelectedField from "./SelectedField";
+import UIField from "../UIComponents/UIField";
+import CountryOptions from "../Form/CountryOptions";
 import countries from "../../data/countries";
-import ActiveCities from "./ActiveCities";
+import CitiesOptions from "../Form/CitiesOptions";
 import cities from "../../data/cities";
 
-export default class ContactsInfo extends React.Component {
+export default class Contacts extends React.Component {
   getCities = countryId => {
     const aciveCities = [];
     for (let key in cities) {
@@ -23,7 +23,7 @@ export default class ContactsInfo extends React.Component {
     const cities = this.getCities(values.country);
     return (
       <div>
-        <Field
+        <UIField
           id="email"
           labelText="email"
           type="text"
@@ -33,7 +33,7 @@ export default class ContactsInfo extends React.Component {
           onChange={onChange}
           error={errors.email}
         />
-        <Field
+        <UIField
           id="mobile"
           labelText="mobile"
           type="tel"
@@ -43,8 +43,8 @@ export default class ContactsInfo extends React.Component {
           onChange={onChange}
           error={errors.mobile}
         />
-        <SelectedField array={countries} onChange={onChange} />
-        <ActiveCities
+        <CountryOptions countries={countries} onChange={onChange} />
+        <CitiesOptions
           cities={cities}
           onChange={onChange}
           values={values}

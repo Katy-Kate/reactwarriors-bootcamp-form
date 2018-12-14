@@ -1,8 +1,8 @@
 import React from "react";
 
-export default class SelectedField extends React.Component {
+export default class CountryOptions extends React.Component {
   render() {
-    const { array, onChange } = this.props;
+    const { countries, onChange } = this.props;
     return (
       <div className="form-group">
         <label htmlFor="country">Country</label>
@@ -12,7 +12,7 @@ export default class SelectedField extends React.Component {
           name="country"
           onChange={onChange}
         >
-          {array.map(item => {
+          {countries.map(item => {
             return (
               <option key={item.id} value={item.id}>
                 {item.name}
