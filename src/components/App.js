@@ -32,7 +32,7 @@ export default class App extends React.Component {
         mobile: false,
         city: false
       },
-      activeStep: 1
+      activeStep: 4
     };
   }
 
@@ -81,7 +81,8 @@ export default class App extends React.Component {
     }
     return errors;
   };
-  onChangeStep = event => () => {
+  onChangeStep = event => a => {
+    a.preventDefault();
     const { activeStep } = this.state;
     const errors = this.validateFields();
 
