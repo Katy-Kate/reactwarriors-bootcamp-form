@@ -27,7 +27,6 @@ export default class App extends React.Component {
         lastname: false,
         password: false,
         repeatPassword: false,
-        gender: "male",
         email: false,
         mobile: false,
         city: false
@@ -70,7 +69,6 @@ export default class App extends React.Component {
         errors.email = "Invalid email address";
       }
       if (!regExpMobile.test(values.mobile)) {
-        console.log("Daaa");
         errors.mobile = "Invalid mobile number";
       }
       if (!values.city) {
@@ -113,12 +111,10 @@ export default class App extends React.Component {
     };
 
     reader.readAsDataURL(avatar);
-
-    console.log("ava", event.target);
   };
   onClearInfo = () => {
     this.setState({
-      values: {},
+      values: { gender: "male" },
       activeStep: 1
     });
   };

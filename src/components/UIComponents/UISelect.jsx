@@ -1,18 +1,18 @@
 import React from "react";
 
-export default class CountryOptions extends React.Component {
+export default class UISelect extends React.Component {
   render() {
-    const { countries, onChange } = this.props;
+    const { options, onChange, title, name } = this.props;
     return (
       <div className="form-group">
-        <label htmlFor="country">Country</label>
+        <label htmlFor="country">{title}</label>
         <select
           className="form-control"
-          id="country"
-          name="country"
+          id={name}
+          name={name}
           onChange={onChange}
         >
-          {countries.map(item => {
+          {options.map(item => {
             return (
               <option key={item.id} value={item.id}>
                 {item.name}
