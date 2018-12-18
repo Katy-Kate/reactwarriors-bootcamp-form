@@ -19,7 +19,7 @@ export default class App extends React.Component {
         email: "",
         mobile: "",
         country: 1,
-        city: "",
+        city: "2",
         avatar: ""
       },
       errors: {
