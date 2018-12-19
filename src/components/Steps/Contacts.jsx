@@ -3,8 +3,15 @@ import UIField from "../UIComponents/UIField";
 import UISelect from "../UIComponents/UISelect";
 import countries from "../../data/countries";
 import cities from "../../data/cities";
+import { observer, inject } from "mobx-react";
 
-export default class Contacts extends React.Component {
+@inject(({ formStore }) => ({
+  values: formStore.values,
+  onChange: formStore.onChange,
+  errors: formStore.errors
+}))
+@observer
+class Contacts extends React.Component {
   getCities = countryId => {
     return Object.entries(cities).reduce((acc, currVal) => {
       if (Number(countryId) === Number(currVal[1].country)) {
@@ -13,11 +20,12 @@ export default class Contacts extends React.Component {
       return acc;
     }, []);
   };
+
   render() {
     const { values, onChange, errors } = this.props;
     const cities = this.getCities(values.country);
     return (
-      <div>
+      <React.Fragment>
         <UIField
           id="email"
           labelText="email"
@@ -51,7 +59,8 @@ export default class Contacts extends React.Component {
           name="city"
           error={errors.city}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
+export default Contacts;

@@ -1,7 +1,14 @@
 import React from "react";
 import avatar from "../../images/default-avatar.png";
+import { inject, observer } from "mobx-react";
 
-export default class Avatar extends React.Component {
+@inject(({ formStore }) => ({
+  onChangeAvatar: formStore.onChangeAvatar,
+  img: formStore.values.avatar,
+  error: formStore.errors.avatar
+}))
+@observer
+class Avatar extends React.Component {
   render() {
     const { onChangeAvatar, img, error } = this.props;
     return (
@@ -25,3 +32,5 @@ export default class Avatar extends React.Component {
     );
   }
 }
+
+export default Avatar;

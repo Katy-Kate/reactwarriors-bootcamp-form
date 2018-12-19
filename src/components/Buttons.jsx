@@ -1,6 +1,13 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
 
-export default class ButtonsSteps extends React.Component {
+@inject(({ formStore }) => ({
+  activeStep: formStore.activeStep,
+  onChangeStep: formStore.onChangeStep,
+  onClearInfo: formStore.onClearInfo
+}))
+@observer
+class ButtonsSteps extends React.Component {
   render() {
     const { activeStep, onChangeStep, onClearInfo } = this.props;
 
@@ -41,3 +48,4 @@ export default class ButtonsSteps extends React.Component {
     );
   }
 }
+export default ButtonsSteps;
