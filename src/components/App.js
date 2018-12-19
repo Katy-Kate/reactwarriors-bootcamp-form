@@ -6,22 +6,17 @@ import Buttons from "./Buttons";
 import Finish from "./Steps/Finish";
 import Steps from "./Header/Steps";
 
-export default class App extends React.Component {
+import { observer, inject } from "mobx-react";
+
+@inject(({ formStore }) => {
+  console.log("Store", formStore.values.firstname);
+  return { values: formStore.values, onChange: formStore.onChange };
+})
+@observer
+class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      values: {
-        firstname: "",
-        lastname: "",
-        password: "",
-        repeatPassword: "",
-        gender: "male",
-        email: "",
-        mobile: "",
-        country: 1,
-        city: "",
-        avatar: ""
-      },
       errors: {
         firstname: false,
         lastname: false,
@@ -35,13 +30,6 @@ export default class App extends React.Component {
     };
   }
 
-  onChange = e => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState(prevState => ({
-      values: { ...prevState.values, [name]: value }
-    }));
-  };
   validateFields = () => {
     const errors = {};
     const { activeStep, values } = this.state;
@@ -119,20 +107,17 @@ export default class App extends React.Component {
     });
   };
   render() {
-    const { activeStep, values, errors } = this.state;
+    const { activeStep, errors } = this.state;
+    const { values, onChange } = this.props;
     return (
       <div className="form-container card">
         <form className="form card-body">
           <Steps activeStep={activeStep} />
           {activeStep === 1 ? (
-            <Basic errors={errors} onChange={this.onChange} values={values} />
+            <Basic errors={errors} onChange={onChange} values={values} />
           ) : null}
           {activeStep === 2 ? (
-            <Contacts
-              errors={errors}
-              onChange={this.onChange}
-              values={values}
-            />
+            <Contacts errors={errors} onChange={onChange} values={values} />
           ) : null}
           {activeStep === 3 ? (
             <Avatar
@@ -153,3 +138,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default App;
