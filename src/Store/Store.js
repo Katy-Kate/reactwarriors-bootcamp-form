@@ -38,24 +38,13 @@ class Store {
   getLocation = () => {
     const { country, name } = cities[this.values.city];
     let countryName;
-    countries.map(i => {
+    countries.forEach(i => {
       if (i.id === country) {
         countryName = i.name;
       }
     });
 
     return countryName + " , " + name;
-  };
-
-  getClassName = id => {
-    const { activeStep } = this;
-    if (activeStep === id) {
-      return "step is-active";
-    } else if (activeStep - id >= 1) {
-      return "step is-completed";
-    } else {
-      return "step";
-    }
   };
 
   validateFields = () => {

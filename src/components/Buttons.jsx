@@ -25,7 +25,7 @@ class ButtonsSteps extends React.Component {
             <button
               type="button"
               className="mr-2 ml-2 btn btn-light"
-              onClick={activeStep !== 4 ? onChangeStep("Next") : null}
+              onClick={onChangeStep("Next")}
             >
               Next
             </button>
