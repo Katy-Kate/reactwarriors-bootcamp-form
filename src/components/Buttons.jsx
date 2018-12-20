@@ -10,7 +10,6 @@ import { inject, observer } from "mobx-react";
 class ButtonsSteps extends React.Component {
   render() {
     const { activeStep, onChangeStep, onClearInfo } = this.props;
-
     return (
       <React.Fragment>
         {activeStep !== 4 && (
@@ -19,14 +18,14 @@ class ButtonsSteps extends React.Component {
               type="button"
               disabled={activeStep === 1}
               className="mr-2 ml-2 btn btn-light"
-              onClick={activeStep !== 1 ? onChangeStep("Previous") : undefined}
+              onClick={onChangeStep("Previous")}
             >
               Previous
             </button>
             <button
               type="button"
               className="mr-2 ml-2 btn btn-light"
-              onClick={activeStep !== 4 ? onChangeStep("Next") : undefined}
+              onClick={activeStep !== 4 ? onChangeStep("Next") : null}
             >
               Next
             </button>
@@ -48,4 +47,5 @@ class ButtonsSteps extends React.Component {
     );
   }
 }
+
 export default ButtonsSteps;

@@ -15,16 +15,14 @@ import { observer, inject } from "mobx-react";
 @observer
 class App extends React.Component {
   render() {
-    const { activeStep } = this.props;
     return (
       <div className="form-container card">
         <form className="form card-body">
-          <Steps activeStep={activeStep} />
-          {activeStep === 1 ? <Basic /> : null}
-          {activeStep === 2 ? <Contacts /> : null}
-          {activeStep === 3 ? <Avatar /> : null}
-          {activeStep === 4 ? <Finish /> : null}
-
+          <Steps />
+          {this.props.activeStep === 1 ? <Basic /> : null}
+          {this.props.activeStep === 2 ? <Contacts /> : null}
+          {this.props.activeStep === 3 ? <Avatar /> : null}
+          {this.props.activeStep === 4 ? <Finish /> : null}
           <Buttons />
         </form>
       </div>

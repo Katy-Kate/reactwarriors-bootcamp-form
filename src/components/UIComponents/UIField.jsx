@@ -1,23 +1,35 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-const UIField = props => {
-  return (
-    <div className="form-group">
-      <label htmlFor={props.id}>{props.labelText}</label>
-      <input
-        type={props.type}
-        className="form-control"
-        id={props.id}
-        placeholder={props.placeholderText}
-        name={props.name}
-        value={props.value}
-        onChange={props.onChange}
-      />
-      {props.error ? (
-        <div className="invalid-feedback">{props.error}</div>
-      ) : null}
-    </div>
-  );
-};
-export default observer(UIField);
+@observer
+class UIField extends React.Component {
+  render() {
+    const {
+      id,
+      labelText,
+      type,
+      placeholderText,
+      name,
+      value,
+      onChange,
+      error
+    } = this.props;
+
+    return (
+      <div className="form-group">
+        <label htmlFor={id}>{labelText}</label>
+        <input
+          type={type}
+          className="form-control"
+          id={id}
+          placeholder={placeholderText}
+          name={name}
+          value={value}
+          onChange={onChange}
+        />
+        {error ? <div className="invalid-feedback">{error}</div> : null}
+      </div>
+    );
+  }
+}
+export default UIField;

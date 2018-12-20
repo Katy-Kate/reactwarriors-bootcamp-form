@@ -1,6 +1,8 @@
 import React from "react";
+import { observer } from "mobx-react";
 
-export default class UISelect extends React.Component {
+@observer
+class UISelect extends React.Component {
   render() {
     const { options, onChange, title, name } = this.props;
     return (
@@ -24,3 +26,4 @@ export default class UISelect extends React.Component {
     );
   }
 }
+export default UISelect;
