@@ -1,30 +1,32 @@
 import React from "react";
 
-export default class Field extends React.Component {
+export default class UIRadioBtn extends React.PureComponent {
   render() {
     const {
       id,
       labelText,
       name,
-      placeholder,
       type,
       onChange,
       value,
-      error
+      error,
+      checked
     } = this.props;
 
     return (
-      <div className="form-group">
-        <label htmlFor={id}>{labelText}</label>
+      <div className="form-check">
         <input
           type={type}
-          className="form-control"
+          className="form-check-input"
           id={id}
-          placeholder={placeholder}
           name={name}
           value={value}
           onChange={onChange}
+          checked={checked}
         />
+        <label htmlFor={id} className="form-check-label">
+          {labelText}
+        </label>
         {error ? <div className="invalid-feedback">{error}</div> : null}
       </div>
     );

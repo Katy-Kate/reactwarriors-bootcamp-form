@@ -1,7 +1,7 @@
 import React from "react";
 import avatar from "../../images/default-avatar.png";
 
-export default class AvatarInfo extends React.Component {
+export default class Avatar extends React.Component {
   render() {
     const { onChangeAvatar, img, error } = this.props;
     return (

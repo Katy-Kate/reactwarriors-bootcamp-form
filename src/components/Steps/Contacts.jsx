@@ -1,29 +1,24 @@
 import React from "react";
-import Field from "./Field";
-import SelectedField from "./SelectedField";
+import UIField from "../UIComponents/UIField";
+import UISelect from "../UIComponents/UISelect";
 import countries from "../../data/countries";
-import ActiveCities from "./ActiveCities";
 import cities from "../../data/cities";
 
-export default class ContactsInfo extends React.Component {
+export default class Contacts extends React.Component {
   getCities = countryId => {
-    const aciveCities = [];
-    for (let key in cities) {
-      if (Number(countryId) === cities[key].country) {
-        aciveCities.push({
-          cityId: key,
-          nameCity: cities[key].name
-        });
+    return Object.entries(cities).reduce((acc, currVal) => {
+      if (Number(countryId) === Number(currVal[1].country)) {
+        acc.push({ id: currVal[0], name: currVal[1].name });
       }
-    }
-    return aciveCities;
+      return acc;
+    }, []);
   };
   render() {
     const { values, onChange, errors } = this.props;
     const cities = this.getCities(values.country);
     return (
       <div>
-        <Field
+        <UIField
           id="email"
           labelText="email"
           type="text"
@@ -33,7 +28,7 @@ export default class ContactsInfo extends React.Component {
           onChange={onChange}
           error={errors.email}
         />
-        <Field
+        <UIField
           id="mobile"
           labelText="mobile"
           type="tel"
@@ -43,11 +38,17 @@ export default class ContactsInfo extends React.Component {
           onChange={onChange}
           error={errors.mobile}
         />
-        <SelectedField array={countries} onChange={onChange} />
-        <ActiveCities
-          cities={cities}
+        <UISelect
+          options={countries}
           onChange={onChange}
-          values={values}
+          title="Country"
+          name="country"
+        />
+        <UISelect
+          options={cities}
+          onChange={onChange}
+          title="City"
+          name="city"
           error={errors.city}
         />
       </div>

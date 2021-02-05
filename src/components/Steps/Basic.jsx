@@ -1,13 +1,13 @@
 import React from "react";
-import Field from "./Field";
-import Gender from "./Gender";
+import UIField from "../UIComponents/UIField";
+import UIRadioBtn from "../UIComponents/UIRadioBtn";
 
-export default class BasicInfo extends React.Component {
+export default class Basic extends React.Component {
   render() {
     const { values, onChange, errors } = this.props;
     return (
-      <div className="form-group">
-        <Field
+      <React.Fragment>
+        <UIField
           id="firstname"
           labelText="firstname"
           type="text"
@@ -17,7 +17,7 @@ export default class BasicInfo extends React.Component {
           onChange={onChange}
           error={errors.firstname}
         />
-        <Field
+        <UIField
           id="lastname"
           labelText="lastname"
           type="text"
@@ -27,7 +27,7 @@ export default class BasicInfo extends React.Component {
           onChange={onChange}
           error={errors.lastname}
         />
-        <Field
+        <UIField
           id="password"
           labelText="Password"
           type="password"
@@ -37,18 +37,38 @@ export default class BasicInfo extends React.Component {
           onChange={onChange}
           error={errors.password}
         />
-        <Field
+        <UIField
           id="repeatPassword"
           labelText="Repeat password"
           type="password"
-          placeholderText="Enter repeatPassword"
+          placeholderText="Repeat password"
           name="repeatPassword"
           value={values.repeatPassword}
           onChange={onChange}
           error={errors.repeatPassword}
         />
-        <Gender gender={values.gender} onChange={onChange} />
-      </div>
+        <fieldset className="form-group">
+          <div>Gender</div>
+          <UIRadioBtn
+            type="radio"
+            name="gender"
+            id="male"
+            value="male"
+            labelText="Male"
+            onChange={onChange}
+            checked={values.gender === "male"}
+          />
+          <UIRadioBtn
+            type="radio"
+            name="gender"
+            id="female"
+            value="female"
+            labelText="Female"
+            checked={values.gender === "female"}
+            onChange={onChange}
+          />
+        </fieldset>
+      </React.Fragment>
     );
   }
 }

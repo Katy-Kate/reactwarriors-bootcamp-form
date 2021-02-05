@@ -12,7 +12,7 @@ export default class Step extends React.Component {
     }
   };
   render() {
-    const { nameStep, id, activeStep } = this.props;
+    const { nameStep, id } = this.props;
     return (
       <div className={this.getClassName()}>
         <div className="step__marker">{id}</div>
